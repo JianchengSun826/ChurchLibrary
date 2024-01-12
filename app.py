@@ -1,5 +1,5 @@
-# flask创建http接口
 from flask import Flask, request, jsonify,render_template
+from flask_mail import Mail, Message
 # 支持flask跨域
 from flask_cors import CORS 
 # 创建flask服务
@@ -23,6 +23,13 @@ books = [
         "status": False
     },
 ]
+app.config['MAIL_SERVER'] = 'smtp.google.com'  
+#  to be fix
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = '.google.com'
+app.config['MAIL_PASSWARD'] = 'passward'
+mail = Mail(app)
+
 
 # 首页
 @app.route('/Library',methods=['get'])
@@ -47,6 +54,14 @@ def rentbook():
     # 添加到books末尾
     books.append(book)
     return jsonify({"books":books})
+
+# mail
+@app.route('/Mail', receiver)
+def mail():
+
+    return
+
+
 
 
  
