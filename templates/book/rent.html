@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="form">
+        <lable>姓名</lable>
+        <input type="text" name="name" id="name">
+        <label>邮箱</label>
+        <input type="text" name="email" id="email">
+        <!-- <label>手机号</label>
+        <input type="text" name="phone-number" id="phone-number"> -->
+        <button type="submit">提交</button>
+    </form>
+    <!-- 引入axios发送请求给后端 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        const addform = document.querySelector("#form")
+        const Name = document.querySelector("#name")
+        const email = document.querySelector("#email")
+        const phoneNumber = document.querySelector("#phone-number")
+
+        // 邮箱确认借阅，提醒还书时间规则
+        addform.addEventListener("submit", function (e) {
+            e.preventDefault();
+            // console.log(bookName.value);
+            // 发送请求给后端
+            axios.post('http://localhost:5000/Library/rentbook',
+                // 传递json数据给后端
+                {
+                    name: bookName.value,
+                    author: bookAuthor.value,
+                    desc: bookDesc.value,
+                    price: bookPrice.value
+                })
+                // axios请求完成后
+                .then((res) => {
+                    // 后端处理完请求,axios拿到的结果
+                    console.log(res);
+                    alert('添加成功')
+                    // 跳转首页
+                    window.location.href = 'http://localhost:5000/Library'
+                })
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 加样式,居中 -->
+<style>
+    * {
+        margin: 0 auto;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <br>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>书名</th>
+                <th>作者</th>
+                <th>描述</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %} {# 遍历 books 变量 #}
+            <tr id={{book.id}}>
+                <th>{{book.name}}</th>
+                <th>{{book.author}}</th>
+                <th>{{book.desc}}</th>
+                <th>{{book.status}}</th>
+                <th>
+                    {% if book.status %}
+                    <a href="http://localhost:5000/Library/rentbook">借阅</a>
+                    <!-- <button id={{book.id}}>借阅</button> -->
+                    {% else %}
+                    <button> 邮件提醒</button>
+                    {% endif %}
+                </th>
+            </tr>
+            {% endfor %} {# 使用 endfor 标签结束 for 语句 #}
+        </tbody>
+    </table>
+    <br>
+    <!-- <a href="http://localhost:5000/Library/addbook">添加图书</a>-->
+    <!-- axios,可以发送请求给后端 -->
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+    <!-- <script>-->
+    <!--     // 按钮-->
+    <!--     const btns = document.querySelectorAll('th > button')-->
+    <!--     // 遍历-->
+    <!--     btns.forEach((b) => {-->
+    <!--        console.log(b.id);-->
+    <!--         // 给按钮添加click事件-->
+    <!--         b.addEventListener('click', function (e) {-->
+    <!--             // todo 弹出确认框,是否删除-->
+    <!--             // 删除-->
+    <!--             axios.delete(("http://localhost:5000/Library/delete?id=" + b.id))-->
+    <!--                 .then((res) => {-->
+    <!--                     if (res.status == 200 && res.data) {-->
+    <!--                         // 刷新页面 -->
+    <!--                         location.reload();-->
+    <!--                         alert('删除成功')-->
+    <!--                     } else {-->
+    <!--                         alert('删除失败')-->
+    <!--                     }-->
+    <!--                 })-->
+    <!--         })-->
+    <!--     })-->
+    <!-- </script> -->
+</body>
+
+</html>
